@@ -90,7 +90,14 @@ class CounterListView extends HookConsumerWidget {
               icon: const Icon(Icons.remove_from_queue),
             ),
             title: Text("$index"),
-            trailing: ,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(onPressed: (){}, icon: Icon(Icons.add)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.remove))
+              ],
+            ),
+
           );
         });
   }
