@@ -67,12 +67,23 @@ class NewCounterButton extends HookConsumerWidget {
   Widget build(BuildContext context , ref) {
 
     return Center(
-      child: IconButton(
-        onPressed: (){
-          ref.read(counterControllerProvider.notifier).add();
-        },
-        icon: const Icon(Icons.add),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+          IconButton(
+            onPressed: (){
+              ref.read(counterControllerProvider.notifier).add();
+            },
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+              onPressed: (){
+                ref.read(counterControllerProvider.notifier).saveState();
+              }, icon: const Icon(Icons.add_circle)),
+        ],
       ),
+
     );
   }
 }
