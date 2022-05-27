@@ -20,4 +20,18 @@ class CounterController extends StateNotifier< List<Counter>>{
       state = [...state];
   }
 
+  void increment(int index){
+      final counter = state[index];
+      state[index] = counter.increment();
+      state = [...state];
+
+  }
+
+  void decrement(int index){
+    final counter = state[index];
+    state[index] = counter.decrement();
+    state = [...state];
+  }
+
+
 }

@@ -9,10 +9,10 @@ class Counter {
   }
 
   Counter increment(){
-    return Counter(id: id, value: value + 1);
+    return Counter( value: value + 1);
   }
 
   Counter decrement(){
-    return Counter( id: id, value: value - 1);
+    return Counter(  value: value - 1);
   }
 }

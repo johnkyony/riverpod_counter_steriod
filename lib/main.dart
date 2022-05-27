@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'counter/controller.dart';
+
 void main() {
   runApp( const ProviderScope(child: MyApp()));
 }
@@ -63,10 +65,11 @@ class NewCounterButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context , ref) {
+
     return Center(
       child: IconButton(
         onPressed: (){
-
+          ref.read(counterControllerProvider.notifier).add();
         },
         icon: const Icon(Icons.add),
       ),
@@ -79,22 +82,30 @@ class CounterListView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context , ref) {
+    final counters = ref.watch(counterControllerProvider);
     return ListView.builder(
-        itemCount: 5,
+        itemCount: counters.length,
         itemBuilder: (context , index){
+          final counter = counters[index];
           return ListTile(
             leading: IconButton(
               onPressed: (){
-
+                  ref.read(counterControllerProvider.notifier).delete(index);
               },
-              icon: const Icon(Icons.remove_from_queue),
+              icon: const Icon(Icons.delete),
             ),
-            title: Text("$index"),
+            title: Text("${counter.value}"),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.add)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.remove))
+                IconButton(onPressed: (
+
+                    ){
+                  ref.read(counterControllerProvider.notifier).increment(index);
+                }, icon: const Icon(Icons.add)),
+                IconButton(onPressed: (){
+                  ref.read(counterControllerProvider.notifier).decrement(index);
+                }, icon: const Icon(Icons.remove))
               ],
             ),
 
